@@ -19,7 +19,7 @@ jobs:
         flutter pub add shared_preferences
         flutter build apk --release
     - name: APKyi İndir
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: Sahih_Din_Oyunu_APK
         path: build/app/outputs/flutter-apk/app-release.apk

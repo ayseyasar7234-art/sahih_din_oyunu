@@ -1,0 +1,25 @@
+name: APK Uretici
+on:
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: subosito/flutter-action@v2
+      with:
+        channel: 'stable'
+    - name: Android Sistemini Otomatik Kur
+      run: |
+        mkdir yedek
+        mv lib/main.dart yedek/
+        flutter create . --org com.sahihdin.app --project-name sahih_din
+        rm lib/main.dart
+        mv yedek/main.dart lib/
+        flutter pub add shared_preferences
+        flutter build apk --release
+    - name: APKyi İndir
+      uses: actions/upload-artifact@v3
+      with:
+        name: Sahih_Din_Oyunu_APK
+        path: build/app/outputs/flutter-apk/app-release.apk
